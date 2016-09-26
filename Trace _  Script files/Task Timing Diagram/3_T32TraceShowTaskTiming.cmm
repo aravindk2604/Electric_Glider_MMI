@@ -1,0 +1,18 @@
+;========================================================================
+; Praktikum Mikrocomputertechnik / Real-Time Systems Lab 2011
+;
+; Lauterbach TRACE32 Trace-Data Display
+;
+;
+; 111109 mys
+;========================================================================
+
+; Display timing of all functions
+Trace.Chart.Symbol /Track
+
+; Display task timing only
+Trace.Chart.Task /Track
+
+;========================================================================
+
+ENDDO

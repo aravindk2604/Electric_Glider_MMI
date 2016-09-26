@@ -1,0 +1,11 @@
+.\obj\glcd_spi_stm32.o: ..\Utilities\MCBSTM32C\GLCD_SPI_STM32.c
+.\obj\glcd_spi_stm32.o: ..\StdPeriph_Lib\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cl.h
+.\obj\glcd_spi_stm32.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.1.0\CMSIS\Include\core_cm3.h
+.\obj\glcd_spi_stm32.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+.\obj\glcd_spi_stm32.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.1.0\CMSIS\Include\core_cmInstr.h
+.\obj\glcd_spi_stm32.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.1.0\CMSIS\Include\core_cmFunc.h
+.\obj\glcd_spi_stm32.o: ..\StdPeriph_Lib\STM32F10x_StdPeriph_Driver\inc\system_stm32f10x_cl.h
+.\obj\glcd_spi_stm32.o: ..\Utilities\MCBSTM32C\GLCD.h
+.\obj\glcd_spi_stm32.o: ..\Utilities\MCBSTM32C\Font_6x8_h.h
+.\obj\glcd_spi_stm32.o: ..\Utilities\MCBSTM32C\Font_16x24_h.h
+.\obj\glcd_spi_stm32.o: ..\Utilities\MCBSTM32C\Font_20x40_h.h

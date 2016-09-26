@@ -1,0 +1,24 @@
+;========================================================================
+; Praktikum Mikrocomputertechnik / Real-Time Systems Lab 2013/2014
+;
+; Lauterbach TRACE32 Trace-Activation
+;
+;
+; 131121 mys   Test SWD mit STM32F103
+;========================================================================
+
+; Activate ITM trace
+ITM.ON
+Var.Break.Set OSPrioCur /w /TraceData
+Trace.METHOD CAnalyzer
+
+; show trace settings and buffer fill
+;;ITM.state
+Trace.State
+
+print "Running & tracing DataPC ..."
+g                                      ; start program execution
+
+;========================================================================
+
+ENDDO

@@ -1,0 +1,100 @@
+;========================================================================
+; Praktikum Mikrocomputertechnik / Real-Time Systems Lab 2011
+;
+; Lauterbach TRACE32 Debugger-Configuration for STM32F107VC
+; with µC/OS - awareness in main menu bar
+;
+;
+; 110706 mys
+;========================================================================
+
+; STM32F107VC memory locations
+&FlashStart=0x08000000
+&RAMStart=0x20000000
+&FlashSize=256.
+&RAMSize=64.
+
+; Setup Screen / Windows structure
+DO T32WinConfig
+
+;========================================================================
+; CPU setup
+
+print "CPU = STM32F107VC"
+SYStem.RESet
+SYStem.CPU STM32F107VC
+SYStem.Up
+
+;========================================================================
+; Flash declaration
+
+FLASH.RESet
+
+if &FlashSize>=256.
+(
+  FLASH.Create 1. &FlashStart++((0x400*&FlashSize)-0x01) 0x800 TARGET Word
+)
+else
+(
+  FLASH.Create 1. &FlashStart++((0x400*&FlashSize)-0x01) 0x400 TARGET Word
+)
+
+if &RAMSize>=6.
+(
+  FLASH.TARGET &RAMStart  (&RAMStart+0x1000) 0x1000 stm32.bin
+;;FLASH.TARGET &RAMStart  (&RAMStart+0x0c00) 0x0800 stm32.bin
+;;FLASH.TARGET 0x20000000 0x20001000         0x1000 stm32.bin
+)
+else
+(
+  dialog.OK "Not enough RAM for flash algorithm."
+  enddo
+)
+
+;**FLASH.List
+
+;========================================================================
+; Flash programming
+;
+DIALOG.YESNO "(Re-) Program flash memory ?"
+LOCAL &progflash
+ENTRY &progflash
+
+IF &progflash 
+(
+;;FLASH.ReProgram ALL /Erase
+;;Data.LOAD.auto *
+;;FLASH.ReProgram off
+                       ;;)
+
+; Activate flash driver
+  FLASH.ReProgram ALL    ; /Erase
+  
+;;Setup erased flash values
+;;Data.Set &FlashStart++((0x400*&FlashSize)-0x01) %Long 0xffffffff
+  
+; Download a file 
+  Data.LOAD.auto \DBG\*.axf
+  
+; Erase and program modified sectors
+  FLASH.ReProgram OFF
+  
+;; Verify flash programming
+;; Data.LOAD.auto * /ComPare
+
+  print "Flash programming SUCCESSFUL !"
+)
+
+; initialize OS awareness
+print "Initializing uC/OS awareness"
+TASK.CONFIG ucos			; load ucos awareness (ucos.t32)
+MENU.ReProgram ucos			; load ucos specific menu (ucos.men)
+
+print "Run to main()"
+g main
+
+;print "Run to SystemInit()"
+;g SystemInit
+
+
+ENDDO

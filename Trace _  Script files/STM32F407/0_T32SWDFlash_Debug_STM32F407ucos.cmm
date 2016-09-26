@@ -1,0 +1,39 @@
+;========================================================================
+; Praktikum Mikrocomputertechnik / Real-Time Systems Lab 2014
+;
+; Lauterbach TRACE32 Flash- & Debugger-Configuration for STM32F407VG
+; Flash-Setup/Programming and Debugging via Serial Wire Debug Port (SWD)
+;
+; SPECIAL FEATURES:
+;
+; µC/OS-awareness in main menu bar ........................... DISABLED
+;
+; 140224 mys - using LTB Doering's example script 
+; 141119 mys - exit flash script with SYStem.Down state
+; 1412ß5 mys - reset after executing flash script
+;========================================================================
+
+; STM32F407VG memory locations
+&FlashStart=0x08000000
+&RAMStart=0x20000000
+&FlashSize=1024.
+&RAMSize=128.
+
+; Setup Screen / Windows structure
+DO T32WinConfig
+
+; init cpu & flash settings using LTB Doering's example script
+DO flash_stm32f4xx CPU=STM32F407VG
+
+SYStem.Down                         ; reset device after flashing
+SYStem.Up
+
+; initialize OS awareness
+;;print "Initializing uC/OS awareness"
+;;TASK.CONFIG ucos			; load ucos awareness (ucos.t32)
+;;MENU.ReProgram ucos			; load ucos specific menu (ucos.men)
+
+;;print "Run to main()"
+;;g main
+
+ENDDO
